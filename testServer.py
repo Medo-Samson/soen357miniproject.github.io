@@ -16,8 +16,25 @@ while True:
     if line1[0] == 'GET':
         data = ''
         if line1[1] == '/':
-            header = 'HTTP/1.1 200 OK\nContent-Type: text/html\n\n'
-            data = 'Hello world!'
+
+            try:
+                with open('home.html', 'r') as f:
+                    data = f.read()
+                header = 'HTTP/1.1 200 OK\nContent-Type: text/html\n\n'
+            except:
+                header = 'HTTP/1.1 404 Not Found\n\n'
+                data = ''
+        
+        elif line1[1] == '/page2.html':
+        
+            try:
+                with open('page2.html', 'r') as f:
+                    data = f.read()
+                header = 'HTTP/1.1 200 OK\nContent-Type: text/html\n\n'
+            except:
+                header = 'HTTP/1.1 404 Not Found\n\n'
+                data = ''
+        
         else:
             header = 'HTTP/1.1 404 Not Found\n\n'
         
